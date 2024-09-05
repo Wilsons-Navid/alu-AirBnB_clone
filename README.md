@@ -27,8 +27,9 @@ The command interpreter facilitates the management of project objects by enablin
 - **help**: Displays a list of available commands.
   
   Example usage:
-  
+  ```
   (hbnb) help
+  ```
 
   This will show documented commands:
   ```
