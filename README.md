@@ -1,8 +1,8 @@
 ![image](https://github.com/user-attachments/assets/a7a7225e-4293-4c7c-b206-fa15c2af0057)
 
-<h1>AIRBNB CLONE Project<h1>
+<h1>AIRBNB CLONE Project</h1>
 
-This project involves creating a basic clone of the AirBnB website, focusing initially on a backend console to manage data, similar to a shell interface. The console commands will enable users to create, update, and delete objects, as well as manage file storage.
+### This project involves creating a basic clone of the AirBnB website, focusing initially on a backend console to manage data, similar to a shell interface. The console commands will enable users to create, update, and delete objects, as well as manage file storage.
 
 ### Console Tasks:
 - Implement a parent class named `BaseModel` for handling initialization, serialization, and deserialization of instances.
