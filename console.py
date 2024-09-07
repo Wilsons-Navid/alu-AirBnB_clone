@@ -2,8 +2,10 @@
 """
 Module for console
 
-This is the interactive section
+This module provides an interactive shell for managing
+different model instances in the application
 """
+
 import cmd
 import re
 import shlex
@@ -61,7 +63,10 @@ def split_curly_braces(e_arg):
 
 class HBNBCommand(cmd.Cmd):
     """
-    HBNBCommand console class.
+    HBNBCommand class
+
+    This class provides a command-line interface for managing
+    model instances. It inherits from cmd.Cmd.
     """
     prompt = "(hbnb) "
     valid_classes = ["BaseModel", "User", "Amenity",
