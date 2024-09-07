@@ -1,6 +1,8 @@
 #!/usr/bin/python
 """
 Module for console
+
+This is the interactive section
 """
 import cmd
 import re
@@ -18,7 +20,13 @@ from models.city import City
 
 def split_curly_braces(e_arg):
     """
-    Splits the curly braces for the update method
+    Splits the curly braces for the update method.
+
+    Args:
+        e_arg (str): The argument string containing curly braces.
+
+    Returns:
+        tuple: The id and dictionary of attributes if found.
     """
     curly_braces = re.search(r"\{(.*?)\}", e_arg)
 
@@ -30,7 +38,7 @@ def split_curly_braces(e_arg):
         try:
             arg_dict = ast.literal_eval("{" + str_data + "}")
         except Exception:
-            print("**  invalid dictionary format **")
+            print("** invalid dictionary format **")
             return
         return id, arg_dict
     else:
@@ -53,7 +61,7 @@ def split_curly_braces(e_arg):
 
 class HBNBCommand(cmd.Cmd):
     """
-    HBNBCommand console class
+    HBNBCommand console class.
     """
     prompt = "(hbnb) "
     valid_classes = ["BaseModel", "User", "Amenity",
@@ -68,19 +76,35 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         """
         EOF (Ctrl+D) signal to exit the program.
+
+        Args:
+            arg: The input argument (not used).
+
+        Returns:
+            bool: True to exit the loop.
         """
         return True
 
     def do_quit(self, arg):
         """
         Quit command to exit the program.
+
+        Args:
+            arg: The input argument (not used).
+
+        Returns:
+            bool: True to exit the loop.
         """
         return True
 
     def do_create(self, arg):
         """
         Create a new instance of BaseModel and save it to the JSON file.
+
         Usage: create <class_name>
+
+        Args:
+            arg (str): The class name.
         """
         commands = shlex.split(arg)
 
@@ -96,7 +120,11 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """
         Show the string representation of an instance.
+
         Usage: show <class_name> <id>
+
+        Args:
+            arg (str): The class name and id.
         """
         commands = shlex.split(arg)
 
@@ -108,7 +136,6 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             objects = storage.all()
-
             key = "{}.{}".format(commands[0], commands[1])
             if key in objects:
                 print(objects[key])
@@ -118,7 +145,11 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, arg):
         """
         Delete an instance based on the class name and id.
+
         Usage: destroy <class_name> <id>
+
+        Args:
+            arg (str): The class name and id.
         """
         commands = shlex.split(arg)
 
@@ -140,11 +171,13 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """
         Print the string representation of all instances or a specific class.
-        Usage: <User>.all()
-                <User>.show()
+
+        Usage: <User>.all() or <User>.show()
+
+        Args:
+            arg (str): The class name.
         """
         objects = storage.all()
-
         commands = shlex.split(arg)
 
         if len(commands) == 0:
@@ -159,11 +192,14 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, arg):
         """
-        Counts and retrieves the number of instances of a class
-        usage: <class name>.count()
+        Counts and retrieves the number of instances of a class.
+
+        Usage: <class name>.count()
+
+        Args:
+            arg (str): The class name.
         """
         objects = storage.all()
-
         commands = shlex.split(arg)
 
         if arg:
@@ -185,7 +221,11 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """
         Update an instance by adding or updating an attribute.
+
         Usage: update <class_name> <id> <attribute_name> "<attribute_value>"
+
+        Args:
+            arg (str): The class name, id, attribute name, and attribute value.
         """
         commands = shlex.split(arg)
 
@@ -197,7 +237,6 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             objects = storage.all()
-
             key = "{}.{}".format(commands[0], commands[1])
             if key not in objects:
                 print("** no instance found **")
@@ -212,7 +251,6 @@ class HBNBCommand(cmd.Cmd):
                 if curly_braces:
                     try:
                         str_data = curly_braces.group(1)
-
                         arg_dict = ast.literal_eval("{" + str_data + "}")
 
                         attribute_names = list(arg_dict.keys())
@@ -232,7 +270,6 @@ class HBNBCommand(cmd.Cmd):
                     except Exception:
                         pass
                 else:
-
                     attr_name = commands[2]
                     attr_value = commands[3]
 
@@ -246,25 +283,28 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, arg):
         """
-        Default behavior for cmd module when input is invalid
+        Default behavior for cmd module when input is invalid.
+
+        Args:
+            arg (str): The input argument.
         """
         arg_list = arg.split('.')
 
-        cls_nm = arg_list[0]  # incoming class name
+        cls_nm = arg_list[0]  # Incoming class name
 
         command = arg_list[1].split('(')
 
-        cmd_met = command[0]  # incoming command method
+        cmd_met = command[0]  # Incoming command method
 
-        e_arg = command[1].split(')')[0]  # extra arguments
+        e_arg = command[1].split(')')[0]  # Extra arguments
 
         method_dict = {
-                'all': self.do_all,
-                'show': self.do_show,
-                'destroy': self.do_destroy,
-                'update': self.do_update,
-                'count': self.do_count
-                }
+            'all': self.do_all,
+            'show': self.do_show,
+            'destroy': self.do_destroy,
+            'update': self.do_update,
+            'count': self.do_count
+        }
 
         if cmd_met in method_dict.keys():
             if cmd_met != "update":
