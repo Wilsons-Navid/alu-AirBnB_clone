@@ -1,9 +1,12 @@
 #!/usr/bin/python
 """
-Module for console
+Console Module
 
 This module provides an interactive shell for managing
-different model instances in the application
+model instances in the application.
+
+Classes:
+    HBNBCommand: A class for handling command-line interactions.
 """
 
 import cmd
