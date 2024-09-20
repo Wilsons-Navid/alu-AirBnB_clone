@@ -15,7 +15,7 @@
 The command interpreter facilitates the management of project objects by enabling:
 
 - Creation of new objects (e.g., a new User or Place).
-- Retrieval of objects from files, databases, etc.
+- Retrieval ofobjects from files, databases, etc.
 - Performing operations on objects (like counting or computing statistics).
 - Updating object attributes.
 - Deleting objects.
